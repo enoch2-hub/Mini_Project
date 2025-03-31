@@ -1,5 +1,4 @@
 # Mini-Project
-# Mini-Project
 
 # 1: Input
 ## - Create a list candidates
