@@ -6,82 +6,141 @@ public class ElectionVotingSystem {
     static int[] votes;
     static boolean[] voted;
     static Scanner scanner = new Scanner(System.in);
-    static boolean running = true; // Flag to control the application loop
+    static final String ADMIN_KEY = "admin123";
 
     public static void main(String[] args) {
         System.out.println("Welcome to Election Voting System");
 
-        // Admin Panel
+        int choice;
+        do {
+            System.out.println("\n===== Main Menu =====");
+            System.out.println("1. Admin Panel");
+            System.out.println("2. Voter Panel");
+            System.out.println("3. View Results");
+            System.out.println("4. Exit");
+            System.out.print("Enter your choice: ");
+            choice = scanner.nextInt();
+            scanner.nextLine(); // Clear buffer
+
+            switch (choice) {
+                case 1:
+                    if (adminPanel()) {
+                        System.out.println("Admin setup completed successfully.");
+                    } else {
+                        System.out.println("Admin setup failed. Try again.");
+                    }
+                    break;
+                case 2:
+                    if (candidates == null || voterIds == null) {
+                        System.out.println("Please setup candidates and voters first via Admin Panel!");
+                    } else {
+                        voterPanel();
+                    }
+                    break;
+                case 3:
+                    if (candidates == null) {
+                        System.out.println("No election data available. Setup election first.");
+                    } else {
+                        displayResults();
+                    }
+                    break;
+                case 4:
+                    System.out.println("Exiting system. Goodbye!");
+                    break;
+                default:
+                    System.out.println("Invalid choice. Please try again.");
+            }
+        } while (choice != 4);
+    }
+
+    static boolean adminPanel() {
+        System.out.print("\nEnter Admin Key: ");
+        String adminKey = scanner.nextLine();
+
+        if (!adminKey.equals(ADMIN_KEY)) {
+            System.out.println("Invalid Admin Key!");
+            return false;
+        }
+
+        System.out.println("\n=== ADMIN PANEL ===");
         System.out.print("Enter number of candidates: ");
         int numCandidates = scanner.nextInt();
+        scanner.nextLine(); // Clear buffer
+
         candidates = new String[numCandidates];
         votes = new int[numCandidates];
 
-        System.out.println("Enter candidate names:");
+        System.out.println("Enter candidate names (letters only):");
         for (int i = 0; i < numCandidates; i++) {
-            System.out.print("Candidate " + (i + 1) + ": ");
-            candidates[i] = scanner.next();
+            while (true) {
+                System.out.print("Candidate " + (i + 1) + ": ");
+                String name = scanner.nextLine().trim();
+                if (name.matches("[a-zA-Z ]+")) {
+                    candidates[i] = name;
+                    break;
+                }
+                System.out.println("Invalid name! Use letters only.");
+            }
         }
 
-        System.out.print("Enter number of voters: ");
+        System.out.print("\nEnter number of voters: ");
         int numVoters = scanner.nextInt();
+        scanner.nextLine(); // Clear buffer
         voterIds = new String[numVoters];
         voted = new boolean[numVoters];
 
         System.out.println("Enter voter IDs:");
         for (int i = 0; i < numVoters; i++) {
             System.out.print("Voter ID " + (i + 1) + ": ");
-            voterIds[i] = scanner.next();
+            voterIds[i] = scanner.nextLine();
         }
 
-        System.out.println("Voting started.");
+        System.out.println("\nAdmin setup completed.");
+        return true;
+    }
 
-        // Voter Panel
+    static void voterPanel() {
+        System.out.println("\n=== VOTER PANEL ===");
         int votersVoted = 0;
 
-//        Code to Quit Application
-        while (running && votersVoted < numVoters) { // Check the running flag
-            System.out.print("Enter your voter ID to vote (or 'exit' to quit): ");
-            String input = scanner.next();
+        while (votersVoted < voterIds.length) {
+            System.out.print("\nEnter voter ID (or 'exit' to end): ");
+            String voterId = scanner.nextLine();
 
-            if (input.equalsIgnoreCase("exit")) {
-                running = false; // Set the flag to exit the loop
-                System.out.println("Exiting the application.");
-                break; // Exit the current loop
-            }
+            if (voterId.equalsIgnoreCase("exit")) break;
 
-            String voterId = input;
             int voterIndex = findVoter(voterId);
 
-//        while (votersVoted < numVoters) {
-//            System.out.print("Enter your voter ID to vote: ");
-//            String voterId = scanner.next();
-//            int voterIndex = findVoter(voterId);
+            if (voterIndex == -1) {
+                System.out.println("Invalid voter ID!");
+                continue;
+            }
 
-            if (voterIndex != -1 && !voted[voterIndex]) {
-                System.out.println("You are eligible to vote.");
-                displayCandidates();
-                System.out.print("Enter the number of your chosen candidate: ");
-                int candidateNumber = scanner.nextInt() - 1;
-
-                if (candidateNumber >= 0 && candidateNumber < numCandidates) {
-                    votes[candidateNumber]++;
-                    voted[voterIndex] = true;
-                    System.out.println("Vote confirmed.");
-                    votersVoted++;
-                } else {
-                    System.out.println("Invalid candidate number.");
-                }
-            } else if (voterIndex != -1 && voted[voterIndex]) {
+            if (voted[voterIndex]) {
                 System.out.println("You have already voted.");
-            } else {
-                System.out.println("You are not eligible to vote.");
+                continue;
+            }
+
+            System.out.println("You are eligible to vote.");
+            displayCandidates();
+
+            System.out.print("Enter candidate number: ");
+            try {
+                int candidateNum = Integer.parseInt(scanner.nextLine()) - 1;
+                if (candidateNum >= 0 && candidateNum < candidates.length) {
+                    votes[candidateNum]++;
+                    voted[voterIndex] = true;
+                    votersVoted++;
+                    System.out.println("Vote recorded for " + candidates[candidateNum]);
+                } else {
+                    System.out.println("Invalid candidate number!");
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Please enter a valid number!");
             }
         }
 
-        // Vote Counting & Results
-        System.out.println("\nVoting ended.");
-        displayResults();
+        System.out.println("\nVoting session ended.");
     }
 
     static int findVoter(String voterId) {
@@ -94,28 +153,48 @@ public class ElectionVotingSystem {
     }
 
     static void displayCandidates() {
-        System.out.println("Available candidates:");
+        System.out.println("\nAvailable Candidates:");
         for (int i = 0; i < candidates.length; i++) {
             System.out.println((i + 1) + ". " + candidates[i]);
         }
     }
 
     static void displayResults() {
-        System.out.println("\nElection Results:");
-        for (int i = 0; i < candidates.length; i++) {
-            double percentage = ((double) votes[i] / voterIds.length) * 100;
-            System.out.println(candidates[i] + ": " + votes[i] + " votes (" + String.format("%.2f", percentage) + "%)");
+        System.out.println("\n=== ELECTION RESULTS ===");
+
+        if (voterIds == null || voterIds.length == 0) {
+            System.out.println("No voters registered!");
+            return;
         }
 
-        int maxVotes = 0;
-        String winner = "";
+        int totalVotes = 0;
+        for (int vote : votes) totalVotes += vote;
+
+        if (totalVotes == 0) {
+            System.out.println("No votes cast yet!");
+            return;
+        }
+
+        // Display individual results
+        for (int i = 0; i < candidates.length; i++) {
+            double percentage = (votes[i] * 100.0) / totalVotes;
+            System.out.printf("%s: %d votes (%.2f%%)\n",
+                    candidates[i], votes[i], percentage);
+        }
+
+        // Determine winner(s)
+        int maxVotes = -1;
+        StringBuilder winners = new StringBuilder();
+
         for (int i = 0; i < candidates.length; i++) {
             if (votes[i] > maxVotes) {
                 maxVotes = votes[i];
-                winner = candidates[i];
+                winners = new StringBuilder(candidates[i]);
+            } else if (votes[i] == maxVotes) {
+                winners.append(", ").append(candidates[i]);
             }
         }
 
-        System.out.println("\nThe winner is: " + winner);
+        System.out.println("\nWinner(s): " + winners.toString());
     }
 }
