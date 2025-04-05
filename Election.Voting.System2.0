@@ -31,7 +31,37 @@ public class ElectionVotingSystem {
             int numCandidates = scanner.nextInt();
             candidates = new String[numCandidates];
             votes = new int[numCandidates];
-            
+            System.out.println("Enter candidate names (letters only, no numbers):"); 
+
+        scanner.nextLine(); // Clear the buffer 
+
+        for (int i = 0; i < numCandidates; i++) { 
+
+            while (true) { 
+
+                System.out.print("Candidate " + (i + 1) + ": "); 
+
+                String name = scanner.nextLine().trim(); 
+
+  
+
+                // Check if name contains only letters (no numbers) 
+
+                if (name.matches("[a-zA-Z ]+")) { 
+
+                    candidates[i] = name; 
+
+                    break; 
+
+                } else { 
+
+                    System.out.println("Invalid name! Use letters only (e.g., 'John Doe')."); 
+
+                } 
+
+            } 
+
+        } 
             System.out.println("Enter candidate names:");
             for (int i = 0; i < numCandidates; i++) {
                 System.out.print("Candidate " + (i + 1) + ": ");
