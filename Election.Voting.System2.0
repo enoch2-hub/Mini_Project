@@ -62,11 +62,7 @@ public class ElectionVotingSystem {
             } 
 
         } 
-            System.out.println("Enter candidate names:");
-            for (int i = 0; i < numCandidates; i++) {
-                System.out.print("Candidate " + (i + 1) + ": ");
-                candidates[i] = scanner.next();
-            }
+         
             
             System.out.print("Enter number of voters: ");
             int numVoters = scanner.nextInt();
