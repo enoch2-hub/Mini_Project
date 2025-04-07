@@ -1,0 +1,376 @@
+import java.util.Scanner;
+
+public class ElectionVotingSystem {
+    static String[] candidates;
+    static String[] voterIds;
+    static int[] votes;
+    static boolean[] voted;
+    static Scanner scanner = new Scanner(System.in);
+    static final String ADMIN_KEY = "admin123";
+    static int languageChoice = 1; // Default to English
+
+    public static void main(String[] args) {
+        System.out.println("Please select the language:");
+        System.out.println("1. English");
+        System.out.println("2. Sinhala");
+        System.out.println("3. Tamil");
+        System.out.print("Enter your choice (1, 2, or 3): ");
+        languageChoice = scanner.nextInt();
+        scanner.nextLine(); // Clear buffer
+
+        String welcomeMessage, mainMenu, adminPanelOption, voterPanelOption, viewResultsOption, exitOption, enterChoice, adminSetupCompleted, adminSetupFailed, setupRequired, invalidChoice, exitingSystem, goodbye, enterAdminKey, invalidAdminKey, enterNumCandidates, enterCandidateNames, candidatePrefix, invalidName, enterNumVoters, enterVoterIds, voterIdPrefix, adminSetupCompletedMsg, voterPanelTitle, enterVoterId, exitWord, invalidVoterId, alreadyVoted, eligibleToVote, enterCandidateNumber, voteRecorded, invalidCandidateNum, pleaseEnterValidNum, votingEnded, availableCandidates, electionResults, noVotersRegistered, noVotesCast, winner;
+
+        switch (languageChoice) {
+            case 1: // English
+                welcomeMessage = "Welcome to Election Voting System";
+                mainMenu = "===== Main Menu =====";
+                adminPanelOption = "1. Admin Panel";
+                voterPanelOption = "2. Voter Panel";
+                viewResultsOption = "3. View Results";
+                exitOption = "4. Exit";
+                enterChoice = "Enter your choice: ";
+                adminSetupCompleted = "Admin setup completed successfully.";
+                adminSetupFailed = "Admin setup failed. Try again.";
+                setupRequired = "Please setup candidates and voters first via Admin Panel!";
+                invalidChoice = "Invalid choice. Please try again.";
+                exitingSystem = "Exiting system. Goodbye!";
+                goodbye = "Goodbye!";
+                enterAdminKey = "Enter Admin Key: ";
+                invalidAdminKey = "Invalid Admin Key!";
+                enterNumCandidates = "Enter number of candidates: ";
+                enterCandidateNames = "Enter candidate names (letters only):";
+                candidatePrefix = "Candidate ";
+                invalidName = "Invalid name! Use letters only.";
+                enterNumVoters = "Enter number of voters: ";
+                enterVoterIds = "Enter voter IDs:";
+                voterIdPrefix = "Voter ID ";
+                adminSetupCompletedMsg = "Admin setup completed.";
+                voterPanelTitle = "\n=== VOTER PANEL ===";
+                enterVoterId = "Enter voter ID (or 'exit' to end): ";
+                exitWord = "exit";
+                invalidVoterId = "Invalid voter ID!";
+                alreadyVoted = "You have already voted.";
+                eligibleToVote = "You are eligible to vote.";
+                enterCandidateNumber = "Enter candidate number: ";
+                voteRecorded = "Vote recorded for ";
+                invalidCandidateNum = "Invalid candidate number!";
+                pleaseEnterValidNum = "Please enter a valid number!";
+                votingEnded = "\nVoting session ended.";
+                availableCandidates = "\nAvailable Candidates:";
+                electionResults = "\n=== ELECTION RESULTS ===";
+                noVotersRegistered = "No voters registered!";
+                noVotesCast = "No votes cast yet!";
+                winner = "\nWinner(s): ";
+                break;
+            case 2: // Sinhala (English text for demonstration)
+                welcomeMessage = "Election Voting System වෙත ඔබව සාදරයෙන් පිළිගනිමු";
+                mainMenu = "\n===== ප්‍රධාන මෙනුව =====";
+                adminPanelOption = "1. පරිපාලක පැනලය";
+                voterPanelOption = "2. ඡන්ද දායක පැනලය";
+                viewResultsOption = "3. ප්‍රතිඵල බලන්න";
+                exitOption = "4. පිටවීම";
+                enterChoice = "ඔබේ තේරීම ඇතුලත් කරන්න: ";
+                adminSetupCompleted = "පරිපාලක සැකසුම සාර්ථකව සම්පූර්ණ කරන ලදී.";
+                adminSetupFailed = "පරිපාලක සැකසුම අසාර්ථක විය. නැවත උත්සාහ කරන්න.";
+                setupRequired = "පරිපාලක පැනලය හරහා අපේක්ෂකයින් සහ ඡන්ද දායකයින් පළමුව සකසන්න!";
+                invalidChoice = "වලංගු නොවන තේරීම. කරුණාකර නැවත උත්සාහ කරන්න.";
+                exitingSystem = "පද්ධතියෙන් පිටවෙමින්. ආයුබෝවන්!";
+                goodbye = "ආයුබෝවන්!";
+                enterAdminKey = "පරිපාලක යතුර ඇතුලත් කරන්න: ";
+                invalidAdminKey = "වලංගු නොවන පරිපාලක යතුර!";
+                enterNumCandidates = "අපේක්ෂකයින් ගණන ඇතුලත් කරන්න: ";
+                enterCandidateNames = "අපේක්ෂකයින්ගේ නම් ඇතුලත් කරන්න (අකුරු පමණි):";
+                candidatePrefix = "අපේක්ෂක ";
+                invalidName = "වලංගු නොවන නම! අකුරු පමණක් භාවිතා කරන්න.";
+                enterNumVoters = "ඡන්ද දායකයින් ගණන ඇතුලත් කරන්න: ";
+                enterVoterIds = "ඡන්ද දායක හැඳුනුම්පත් ඇතුලත් කරන්න:";
+                voterIdPrefix = "ඡන්ද දායක හැඳුනුම්පත ";
+                adminSetupCompletedMsg = "\nපරිපාලක සැකසුම සම්පූර්ණ කරන ලදී.";
+                voterPanelTitle = "\n=== ඡන්ද දායක පැනලය ===";
+                enterVoterId = "ඡන්ද දායක හැඳුනුම්පත ඇතුලත් කරන්න (හෝ පිටවීමට 'exit'): ";
+                exitWord = "exit";
+                invalidVoterId = "වලංගු නොවන ඡන්ද දායක හැඳුනුම්පත!";
+                alreadyVoted = "ඔබ දැනටමත් ඡන්දය ප්‍රකාශ කර ඇත.";
+                eligibleToVote = "ඔබට ඡන්දය ප්‍රකාශ කිරීමට සුදුසුකම් ඇත.";
+                enterCandidateNumber = "අපේක්ෂක අංකය ඇතුලත් කරන්න: ";
+                voteRecorded = "ඡන්දය සටහන් කරන ලදී ";
+                invalidCandidateNum = "වලංගු නොවන අපේක්ෂක අංකය!";
+                pleaseEnterValidNum = "කරුණාකර වලංගු අංකයක් ඇතුලත් කරන්න!";
+                votingEnded = "\nඡන්ද සැසිය අවසන් විය.";
+                availableCandidates = "\nලබා ගත හැකි අපේක්ෂකයින්:";
+                electionResults = "\n=== මැතිවරණ ප්‍රතිඵල ===";
+                noVotersRegistered = "ඡන්ද දායකයින් ලියාපදිංචි වී නොමැත!";
+                noVotesCast = "තවම ඡන්ද ප්‍රකාශ කර නැත!";
+                winner = "\nජයග්‍රාහකයා(න්): ";
+                break;
+            case 3: // Tamil (English text for demonstration)
+                welcomeMessage = "தேர்தல் வாக்களிப்பு அமைப்புக்கு வரவேற்கிறோம்";
+                mainMenu = "\n===== பிரதான பட்டி =====";
+                adminPanelOption = "1. நிர்வாக குழு";
+                voterPanelOption = "2. வாக்காளர் குழு";
+                viewResultsOption = "3. முடிவுகளைக் காண்க";
+                exitOption = "4. வெளியேறு";
+                enterChoice = "உங்கள் விருப்பத்தை உள்ளிடவும்: ";
+                adminSetupCompleted = "நிர்வாக அமைப்பு வெற்றிகரமாக முடிந்தது.";
+                adminSetupFailed = "நிர்வாக அமைப்பு தோல்வியடைந்தது. மீண்டும் முயற்சிக்கவும்.";
+                setupRequired = "நிர்வாகக் குழுவின் மூலம் வேட்பாளர்கள் மற்றும் வாக்காளர்களை முதலில் அமைக்கவும்!";
+                invalidChoice = "தவறான தேர்வு. மீண்டும் முயற்சிக்கவும்.";
+                exitingSystem = "அமைப்பிலிருந்து வெளியேறுகிறது. விடைபெறுகிறேன்!";
+                goodbye = "விடைபெறுகிறேன்!";
+                enterAdminKey = "நிர்வாக விசையை உள்ளிடவும்: ";
+                invalidAdminKey = "தவறான நிர்வாக விசை!";
+                enterNumCandidates = "வேட்பாளர்களின் எண்ணிக்கையை உள்ளிடவும்: ";
+                enterCandidateNames = "வேட்பாளர் பெயர்களை உள்ளிடவும் (எழுத்துக்கள் மட்டும்):";
+                candidatePrefix = "வேட்பாளர் ";
+                invalidName = "தவறான பெயர்! எழுத்துக்களை மட்டும் பயன்படுத்தவும்.";
+                enterNumVoters = "வாக்காளர்களின் எண்ணிக்கையை உள்ளிடவும்: ";
+                enterVoterIds = "வாக்காளர் அடையாளங்களை உள்ளிடவும்:";
+                voterIdPrefix = "வாக்காளர் அடையாள எண் ";
+                adminSetupCompletedMsg = "\nநிர்வாக அமைப்பு முடிந்தது.";
+                voterPanelTitle = "\n=== வாக்காளர் குழு ===";
+                enterVoterId = "வாக்காளர் அடையாள எண்ணை உள்ளிடவும் (அல்லது வெளியேற 'exit'): ";
+                exitWord = "exit";
+                invalidVoterId = "தவறான வாக்காளர் அடையாள எண்!";
+                alreadyVoted = "நீங்கள் ஏற்கனவே வாக்களித்துவிட்டீர்கள்.";
+                eligibleToVote = "நீங்கள் வாக்களிக்க தகுதியுடையவர்.";
+                enterCandidateNumber = "வேட்பாளர் எண்ணை உள்ளிடவும்: ";
+                voteRecorded = "வாக்கு பதிவு செய்யப்பட்டது ";
+                invalidCandidateNum = "தவறான வேட்பாளர் எண்!";
+                pleaseEnterValidNum = "தயவுசெய்து சரியான எண்ணை உள்ளிடவும்!";
+                votingEnded = "\nவாக்களிப்பு அமர்வு முடிந்தது.";
+                availableCandidates = "\nகிடைக்கக்கூடிய வேட்பாளர்கள்:";
+                electionResults = "\n=== தேர்தல் முடிவுகள் ===";
+                noVotersRegistered = "வாக்காளர்கள் பதிவு செய்யப்படவில்லை!";
+                noVotesCast = "வாக்குகள் இன்னும் செலுத்தப்படவில்லை!";
+                winner = "\nவெற்றியாளர்(கள்): ";
+                break;
+            default: // Default to English if invalid language choice
+                welcomeMessage = "Welcome to Election Voting System";
+                mainMenu = "\n===== Main Menu =====";
+                adminPanelOption = "1. Admin Panel";
+                voterPanelOption = "2. Voter Panel";
+                viewResultsOption = "3. View Results";
+                exitOption = "4. Exit";
+                enterChoice = "Enter your choice: ";
+                adminSetupCompleted = "Admin setup completed successfully.";
+                adminSetupFailed = "Admin setup failed. Try again.";
+                setupRequired = "Please setup candidates and voters first via Admin Panel!";
+                invalidChoice = "Invalid choice. Please try again.";
+                exitingSystem = "Exiting system. Goodbye!";
+                goodbye = "Goodbye!";
+                enterAdminKey = "Enter Admin Key: ";
+                invalidAdminKey = "Invalid Admin Key!";
+                enterNumCandidates = "Enter number of candidates: ";
+                enterCandidateNames = "Enter candidate names (letters only):";
+                candidatePrefix = "Candidate ";
+                invalidName = "Invalid name! Use letters only.";
+                enterNumVoters = "Enter number of voters: ";
+                enterVoterIds = "Enter voter IDs:";
+                voterIdPrefix = "Voter ID ";
+                adminSetupCompletedMsg = "\nAdmin setup completed.";
+                voterPanelTitle = "\n=== VOTER PANEL ===";
+                enterVoterId = "Enter voter ID (or 'exit' to end): ";
+                exitWord = "exit";
+                invalidVoterId = "Invalid voter ID!";
+                alreadyVoted = "You have already voted.";
+                eligibleToVote = "You are eligible to vote.";
+                enterCandidateNumber = "Enter candidate number: ";
+                voteRecorded = "Vote recorded for ";
+                invalidCandidateNum = "Invalid candidate number!";
+                pleaseEnterValidNum = "Please enter a valid number!";
+                votingEnded = "\nVoting session ended.";
+                availableCandidates = "\nAvailable Candidates:";
+                electionResults = "\n=== ELECTION RESULTS ===";
+                noVotersRegistered = "No voters registered!";
+                noVotesCast = "No votes cast yet!";
+                winner = "\nWinner(s): ";
+                break;
+        }
+
+        System.out.println(welcomeMessage);
+
+        int choice;
+        do {
+            System.out.println(mainMenu);
+            System.out.println(adminPanelOption);
+            System.out.println(voterPanelOption);
+            System.out.println(viewResultsOption);
+            System.out.println(exitOption);
+            System.out.print(enterChoice);
+            choice = scanner.nextInt();
+            scanner.nextLine(); // Clear buffer
+
+            switch (choice) {
+                case 1:
+                    if (adminPanel(enterAdminKey, invalidAdminKey, enterNumCandidates, enterCandidateNames, candidatePrefix, invalidName, enterNumVoters, enterVoterIds, voterIdPrefix, adminSetupCompletedMsg)) {
+                        System.out.println(adminSetupCompleted);
+                    } else {
+                        System.out.println(adminSetupFailed);
+                    }
+                    break;
+                case 2:
+                    if (candidates == null || voterIds == null) {
+                        System.out.println(setupRequired);
+                    } else {
+                        voterPanel(voterPanelTitle, enterVoterId, exitWord, invalidVoterId, alreadyVoted, eligibleToVote, enterCandidateNumber, voteRecorded, invalidCandidateNum, pleaseEnterValidNum, votingEnded);
+                    }
+                    break;
+                case 3:
+                    if (candidates == null) {
+                        System.out.println("No election data available. Setup election first.");
+                    } else {
+                        displayResults(electionResults, noVotersRegistered, noVotesCast, winner);
+                    }
+                    break;
+                case 4:
+                    System.out.println(exitingSystem);
+                    break;
+                default:
+                    System.out.println(invalidChoice);
+            }
+        } while (choice != 4);
+        System.out.println(goodbye);
+    }
+
+    static boolean adminPanel(String enterAdminKey, String invalidAdminKey, String enterNumCandidates, String enterCandidateNames, String candidatePrefix, String invalidName, String enterNumVoters, String enterVoterIds, String voterIdPrefix, String adminSetupCompletedMsg) {
+        System.out.print("\n" + enterAdminKey);
+        String adminKey = scanner.nextLine();
+
+        if (!adminKey.equals(ADMIN_KEY)) {
+            System.out.println(invalidAdminKey);
+            return false;
+        }
+
+        System.out.println("\n=== ADMIN PANEL ===");
+        System.out.print(enterNumCandidates);
+        int numCandidates = scanner.nextInt();
+        scanner.nextLine(); // Clear buffer
+
+        candidates = new String[numCandidates];
+        votes = new int[numCandidates];
+
+        System.out.println(enterCandidateNames);
+        for (int i = 0; i < numCandidates; i++) {
+            while (true) {
+                System.out.print(candidatePrefix + (i + 1) + ": ");
+                String name = scanner.nextLine().trim();
+                if (name.matches("[a-zA-Z ]+")) {
+                    candidates[i] = name;
+                    break;
+                }
+                System.out.println(invalidName);
+            }
+        }
+
+        System.out.print("\n" + enterNumVoters);
+        int numVoters = scanner.nextInt();
+        scanner.nextLine(); // Clear buffer
+        voterIds = new String[numVoters];
+        voted = new boolean[numVoters];
+
+        System.out.println(enterVoterIds);
+        for (int i = 0; i < numVoters; i++) {
+            System.out.print(voterIdPrefix + (i + 1) + ": ");
+            voterIds[i] = scanner.nextLine();
+        }
+
+        System.out.println(adminSetupCompletedMsg);
+        return true;
+    }
+
+    static void voterPanel(String voterPanelTitle, String enterVoterId, String exitWord, String invalidVoterId, String alreadyVoted, String eligibleToVote, String enterCandidateNumber, String voteRecorded, String invalidCandidateNum, String pleaseEnterValidNum, String votingEnded) {
+        System.out.println(voterPanelTitle);
+        int votersVoted = 0;
+
+        while (votersVoted < voterIds.length) {
+            System.out.print("\n" + enterVoterId);
+            String voterId = scanner.nextLine();
+
+            if (voterId.equalsIgnoreCase(exitWord)) break;
+
+            int voterIndex = findVoter(voterId);
+
+            if (voterIndex == -1) {
+                System.out.println(invalidVoterId);
+                continue;
+            }
+
+            if (voted[voterIndex]) {
+                System.out.println(alreadyVoted);
+                continue;
+            }
+
+            System.out.println(eligibleToVote);
+            displayCandidates();
+
+            System.out.print(enterCandidateNumber);
+            try {
+                int candidateNum = Integer.parseInt(scanner.nextLine()) - 1;
+                if (candidateNum >= 0 && candidateNum < candidates.length) {
+                    votes[candidateNum]++;
+                    voted[voterIndex] = true;
+                    votersVoted++;
+                    System.out.println(voteRecorded + candidates[candidateNum]);
+                } else {
+                    System.out.println(invalidCandidateNum);
+                }
+            } catch (NumberFormatException e) {
+                System.out.println(pleaseEnterValidNum);
+            }
+        }
+
+        System.out.println(votingEnded);
+    }
+
+    static int findVoter(String voterId) {
+        for (int i = 0; i < voterIds.length; i++) {
+            if (voterIds[i].equals(voterId)) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    static void displayCandidates() {
+        System.out.println("\nAvailable Candidates:");
+        for (int i = 0; i < candidates.length; i++) {
+            System.out.println((i + 1) + ". " + candidates[i]);
+        }
+    }
+
+    static void displayResults(String electionResults, String noVotersRegistered, String noVotesCast, String winner) {
+        System.out.println(electionResults);
+
+        if (voterIds == null || voterIds.length == 0) {
+            System.out.println(noVotersRegistered);
+            return;
+        }
+
+        int totalVotes = 0;
+        for (int vote : votes) totalVotes += vote;
+
+        if (totalVotes == 0) {
+            System.out.println(noVotesCast);
+            return;
+        }
+
+        for (int i = 0; i < candidates.length; i++) {
+            double percentage = (votes[i] * 100.0) / totalVotes;
+            System.out.printf("%s: %d votes (%.2f%%)\n", candidates[i], votes[i], percentage);
+        }
+
+        int maxVotes = -1;
+        StringBuilder winners = new StringBuilder();
+
+        for (int i = 0; i < candidates.length; i++) {
+            if (votes[i] > maxVotes) {
+                maxVotes = votes[i];
+                winners = new StringBuilder(candidates[i]);
+            } else if (votes[i] == maxVotes) {
+                winners.append(", ").append(candidates[i]);
+            }
+        }
+
+        System.out.println(winner + winners.toString());
+    }
+}
