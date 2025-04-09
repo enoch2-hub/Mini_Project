@@ -9,7 +9,7 @@ public class ElectionVotingSystem {
     static final String ADMIN_KEY = "admin123";
 
     public static void main(String[] args) {
-        System.out.println("$$$$$ Welcome to Voting System $$$$$");
+        System.out.println("\n$$$$$ Welcome to Voting System $$$$$");
 
         int choice;
         do {
@@ -37,14 +37,14 @@ public class ElectionVotingSystem {
                     if (candidates == null || voterIds == null) {
                         System.out.println("Please setup candidates and voters first  Admin Panel");
                     } else {
-                        voterPanel();
+                        voterpanel();
                     }
                     break;
                 case 3:
                     if (candidates == null) {
                         System.out.println("No election data available. Setup data first");
                     } else {
-                        displayResults();
+                        displayresults();
                     }
                     break;
                 case 4:
@@ -109,7 +109,7 @@ public class ElectionVotingSystem {
                     System.out.print("Voter ID " + (vot + 1) + ": ");
                     int id = Integer.parseInt(scanner.nextLine());
 
-                    if (isVoterIdUnique(id, vot)) {
+                    if (isVoter_IdUnique(id, vot)) {
                         voterIds[vot] = id;
                         break;
                     } else {
@@ -125,7 +125,7 @@ public class ElectionVotingSystem {
         return true;
     }
 
-    static boolean isVoterIdUnique(int id, int currentIndex) {
+    static boolean isVoter_IdUnique(int id, int currentIndex) {
         for (int che = 0; che < currentIndex; che++) {
             if (voterIds[che] == id) {
                 return false;
@@ -135,7 +135,7 @@ public class ElectionVotingSystem {
     }
 
 
-    static void voterPanel() {
+    static void voterpanel() {
         System.out.println("\n=== VOTER PANEL ===");
         int votersVoted = 0;
 
@@ -149,10 +149,10 @@ public class ElectionVotingSystem {
 
             try {
                 int voterId = Integer.parseInt(input);
-                int voterIndex = findVoter(voterId);
+                int voterIndex = findvoter(voterId);
 
                 if (voterIndex == -1) {
-                    System.out.println("Invalid voter ID");
+                    System.out.println("You are not eligible to vote");
                     continue;
                 }
 
@@ -162,7 +162,7 @@ public class ElectionVotingSystem {
                 }
 
                 System.out.println("You are eligible to vote");
-                displayCandidates();
+                display_Candidates();
 
                 System.out.print("Enter candidate number: ");
                 try {
@@ -188,7 +188,7 @@ public class ElectionVotingSystem {
 
 
 
-    static int findVoter(int voterId) {
+    static int findvoter(int voterId) {
         for (int find = 0; find < voterIds.length; find++) {
             if (voterIds[find] == voterId) {
                 return find;
@@ -197,14 +197,14 @@ public class ElectionVotingSystem {
         return -1;
     }
 
-    static void displayCandidates() {
+    static void display_Candidates() {
         System.out.println("\nAvailable Candidates:");
         for (int dis = 0; dis < candidates.length; dis++) {
             System.out.println((dis + 1) + ". " + candidates[dis]);
         }
     }
 
-    static void displayResults() {
+    static void displayresults() {
         System.out.println("\n=== ELECTION RESULTS ===");
 
         if (voterIds == null || voterIds.length == 0) {
@@ -236,7 +236,8 @@ public class ElectionVotingSystem {
             } else if (votes[win] == maxVotes) {
                 winners.append(", ").append(candidates[win]);
             }
-        }
+        
 
         System.out.println("\nWinner : " + winners.toString());
     }
+}
