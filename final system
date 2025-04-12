@@ -241,3 +241,4 @@ public class ElectionVotingSystem {
         System.out.println("\nWinner : " + winners.toString());
     }
 }
+}
