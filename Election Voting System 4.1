@@ -16,14 +16,14 @@ public class ElectionVotingSystem {
         System.out.print("Enter your choice (1 or 2): ");
         if (scanner.hasNextInt()) {
             languageChoice = scanner.nextInt();
-            scanner.nextLine(); // Clear buffer
+            scanner.nextLine(); // Consume the newline
             if (languageChoice != 1 && languageChoice != 2) {
                 System.out.println("Invalid choice. Defaulting to English.");
                 languageChoice = 1;
             }
         } else {
             System.out.println("Invalid input. Defaulting to English.");
-            scanner.nextLine(); // Clear buffer
+            scanner.nextLine(); // Consume the newline
         }
 
         String welcomeMessage, mainMenu, adminPanelOption, voterPanelOption, viewResultsOption, exitOption, enterChoice, adminSetupCompleted, adminSetupFailed, setupRequired, invalidChoice, exitingSystem, goodbye, enterAdminKey, invalidAdminKey, enterNumCandidates, enterCandidateNames, candidatePrefix, invalidName, enterNumVoters, enterVoterIds, voterIdPrefix, adminSetupCompletedMsg, voterPanelTitle, enterVoterId, exitWord, invalidVoterId, alreadyVoted, eligibleToVote, enterCandidateNumber, voteRecorded, invalidCandidateNum, pleaseEnterValidNum, votingEnded, availableCandidates, electionResults, noVotersRegistered, noVotesCast, winner;
@@ -53,7 +53,7 @@ public class ElectionVotingSystem {
                 enterVoterIds = "Enter voter IDs:";
                 voterIdPrefix = "Voter ID ";
                 adminSetupCompletedMsg = "Admin setup completed.";
-                voterPanelTitle = "\n=== VOTER PANEL ===";
+                voterPanelTitle = "=== VOTER PANEL ===";
                 enterVoterId = "Enter voter ID (or 'exit' to end): ";
                 exitWord = "exit";
                 invalidVoterId = "Invalid voter ID!";
@@ -63,16 +63,16 @@ public class ElectionVotingSystem {
                 voteRecorded = "Vote recorded for ";
                 invalidCandidateNum = "Invalid candidate number!";
                 pleaseEnterValidNum = "Please enter a valid number!";
-                votingEnded = "\nVoting session ended.";
-                availableCandidates = "\nAvailable Candidates:";
-                electionResults = "\n=== ELECTION RESULTS ===";
+                votingEnded = "Voting session ended.";
+                availableCandidates = "Available Candidates:";
+                electionResults = "=== ELECTION RESULTS ===";
                 noVotersRegistered = "No voters registered!";
                 noVotesCast = "No votes cast yet!";
-                winner = "\nWinner(s): ";
+                winner = "Winner(s): ";
                 break;
             case 2: // Sinhala (English text for demonstration)
                 welcomeMessage = "Election Voting System වෙත ඔබව සාදරයෙන් පිළිගනිමු";
-                mainMenu = "\n===== ප්‍රධාන මෙනුව =====";
+                mainMenu = "===== ප්‍රධාන මෙනුව =====";
                 adminPanelOption = "1. පරිපාලක පැනලය";
                 voterPanelOption = "2. ඡන්ද දායක පැනලය";
                 viewResultsOption = "3. ප්‍රතිඵල බලන්න";
@@ -93,8 +93,8 @@ public class ElectionVotingSystem {
                 enterNumVoters = "ඡන්ද දායකයින් ගණන ඇතුලත් කරන්න: ";
                 enterVoterIds = "ඡන්ද දායක හැඳුනුම්පත් ඇතුලත් කරන්න:";
                 voterIdPrefix = "ඡන්ද දායක හැඳුනුම්පත ";
-                adminSetupCompletedMsg = "\nපරිපාලක සැකසුම සම්පූර්ණ කරන ලදී.";
-                voterPanelTitle = "\n=== ඡන්ද දායක පැනලය ===";
+                adminSetupCompletedMsg = "පරිපාලක සැකසුම සම්පූර්ණ කරන ලදී.";
+                voterPanelTitle = "=== ඡන්ද දායක පැනලය ===";
                 enterVoterId = "ඡන්ද දායක හැඳුනුම්පත ඇතුලත් කරන්න (හෝ පිටවීමට 'exit'): ";
                 exitWord = "exit";
                 invalidVoterId = "වලංගු නොවන ඡන්ද දායක හැඳුනුම්පත!";
@@ -104,16 +104,16 @@ public class ElectionVotingSystem {
                 voteRecorded = "ඡන්දය සටහන් කරන ලදී ";
                 invalidCandidateNum = "වලංගු නොවන අපේක්ෂක අංකය!";
                 pleaseEnterValidNum = "කරුණාකර වලංගු අංකයක් ඇතුලත් කරන්න!";
-                votingEnded = "\nඡන්ද සැසිය අවසන් විය.";
-                availableCandidates = "\nලබා ගත හැකි අපේක්ෂකයින්:";
-                electionResults = "\n=== මැතිවරණ ප්‍රතිඵල ===";
+                votingEnded = "ඡන්ද සැසිය අවසන් විය.";
+                availableCandidates = "ලබා ගත හැකි අපේක්ෂකයින්:";
+                electionResults = "=== මැතිවරණ ප්‍රතිඵල ===";
                 noVotersRegistered = "ඡන්ද දායකයින් ලියාපදිංචි වී නොමැත!";
                 noVotesCast = "තවම ඡන්ද ප්‍රකාශ කර නැත!";
-                winner = "\nජයග්‍රාහකයා(න්): ";
+                winner = "ජයග්‍රාහකයා(න්): ";
                 break;
             default: // Default to English if invalid language choice
                 welcomeMessage = "Welcome to Election Voting System";
-                mainMenu = "\n===== Main Menu =====";
+                mainMenu = "===== Main Menu =====";
                 adminPanelOption = "1. Admin Panel";
                 voterPanelOption = "2. Voter Panel";
                 viewResultsOption = "3. View Results";
@@ -134,8 +134,8 @@ public class ElectionVotingSystem {
                 enterNumVoters = "Enter number of voters: ";
                 enterVoterIds = "Enter voter IDs:";
                 voterIdPrefix = "Voter ID ";
-                adminSetupCompletedMsg = "\nAdmin setup completed.";
-                voterPanelTitle = "\n=== VOTER PANEL ===";
+                adminSetupCompletedMsg = "Admin setup completed.";
+                voterPanelTitle = "=== VOTER PANEL ===";
                 enterVoterId = "Enter voter ID (or 'exit' to end): ";
                 exitWord = "exit";
                 invalidVoterId = "Invalid voter ID!";
@@ -145,12 +145,12 @@ public class ElectionVotingSystem {
                 voteRecorded = "Vote recorded for ";
                 invalidCandidateNum = "Invalid candidate number!";
                 pleaseEnterValidNum = "Please enter a valid number!";
-                votingEnded = "\nVoting session ended.";
-                availableCandidates = "\nAvailable Candidates:";
-                electionResults = "\n=== ELECTION RESULTS ===";
+                votingEnded = "Voting session ended.";
+                availableCandidates = "Available Candidates:";
+                electionResults = "=== ELECTION RESULTS ===";
                 noVotersRegistered = "No voters registered!";
                 noVotesCast = "No votes cast yet!";
-                winner = "\nWinner(s): ";
+                winner = "Winner(s): ";
                 break;
         }
 
@@ -165,7 +165,7 @@ public class ElectionVotingSystem {
             System.out.println(exitOption);
             System.out.print(enterChoice);
             choice = scanner.nextInt();
-            scanner.nextLine(); // Clear buffer
+            scanner.nextLine(); // Consume the newline
 
             switch (choice) {
                 case 1:
@@ -200,7 +200,7 @@ public class ElectionVotingSystem {
     }
 
     static boolean adminPanel(String enterAdminKey, String invalidAdminKey, String enterNumCandidates, String enterCandidateNames, String candidatePrefix, String invalidName, String enterNumVoters, String enterVoterIds, String voterIdPrefix, String adminSetupCompletedMsg) {
-        System.out.print("\n" + enterAdminKey);
+        System.out.print("   " + enterAdminKey);
         String adminKey = scanner.nextLine();
 
         if (!adminKey.equals(ADMIN_KEY)) {
@@ -208,37 +208,37 @@ public class ElectionVotingSystem {
             return false;
         }
 
-        System.out.println("\n=== ADMIN PANEL ===");
+        System.out.println("=== ADMIN PANEL ===");
         System.out.print(enterNumCandidates);
         int numCandidates = scanner.nextInt();
-        scanner.nextLine(); // Clear buffer
+        scanner.nextLine(); // Consume the newline
 
         candidates = new String[numCandidates];
         votes = new int[numCandidates];
 
         System.out.println(enterCandidateNames);
-        for (int i = 0; i < numCandidates; i++) {
+        for (int c = 0; c < numCandidates; c++) {
             while (true) {
-                System.out.print(candidatePrefix + (i + 1) + ": ");
+                System.out.print(candidatePrefix + (c + 1) + ": ");
                 String name = scanner.nextLine().trim();
                 if (name.matches("[a-zA-Z ]+")) {
-                    candidates[i] = name;
+                    candidates[c] = name;
                     break;
                 }
                 System.out.println(invalidName);
             }
         }
 
-        System.out.print("\n" + enterNumVoters);
+        System.out.print("  " + enterNumVoters);
         int numVoters = scanner.nextInt();
-        scanner.nextLine(); // Clear buffer
+        scanner.nextLine(); // Consume the newline
         voterIds = new String[numVoters];
         voted = new boolean[numVoters];
 
         System.out.println(enterVoterIds);
-        for (int i = 0; i < numVoters; i++) {
-            System.out.print(voterIdPrefix + (i + 1) + ": ");
-            voterIds[i] = scanner.nextLine();
+        for (int voters = 0; voters < numVoters; voters++) {
+            System.out.print(voterIdPrefix + (voters + 1) + ": ");
+            voterIds[voters] = scanner.nextLine();
         }
 
         System.out.println(adminSetupCompletedMsg);
@@ -250,7 +250,7 @@ public class ElectionVotingSystem {
         int votersVoted = 0;
 
         while (votersVoted < voterIds.length) {
-            System.out.print("\n" + enterVoterId);
+            System.out.print("  " + enterVoterId);
             String voterId = scanner.nextLine();
 
             if (voterId.equalsIgnoreCase(exitWord)) break;
@@ -290,18 +290,18 @@ public class ElectionVotingSystem {
     }
 
     static int findVoter(String voterId) {
-        for (int i = 0; i < voterIds.length; i++) {
-            if (voterIds[i].equals(voterId)) {
-                return i;
+        for (int voters = 0; voters < voterIds.length; voters++) {
+            if (voterIds[voters].equals(voterId)) {
+                return voters;
             }
         }
         return -1;
     }
 
     static void displayCandidates() {
-        System.out.println("\nAvailable Candidates:");
-        for (int i = 0; i < candidates.length; i++) {
-            System.out.println((i + 1) + ". " + candidates[i]);
+        System.out.println("Available Candidates:");
+        for (int c = 0; c < candidates.length; c++) {
+            System.out.println((c + 1) + ". " + candidates[c]);
         }
     }
 
@@ -321,23 +321,23 @@ public class ElectionVotingSystem {
             return;
         }
 
-        for (int i = 0; i < candidates.length; i++) {
-            double percentage = (votes[i] * 100.0) / totalVotes;
-            System.out.printf("%s: %d votes (%.2f%%)\n", candidates[i], votes[i], percentage);
+        for (int candidtes = 0; candidtes< candidates.length; candidtes++) {
+            double percentage = (votes[candidtes] * 100.0) / totalVotes;
+            System.out.printf("%s: %d votes (%.2f%%)", candidates[candidtes], votes[candidtes], percentage);
         }
 
         int maxVotes = -1;
         StringBuilder winners = new StringBuilder();
 
-        for (int i = 0; i < candidates.length; i++) {
-            if (votes[i] > maxVotes) {
-                maxVotes = votes[i];
-                winners = new StringBuilder(candidates[i]);
-            } else if (votes[i] == maxVotes) {
-                winners.append(", ").append(candidates[i]);
+        for (int candidtes = 0; candidtes < candidates.length; candidtes++) {
+            if (votes[candidtes] > maxVotes) {
+                maxVotes = votes[candidtes];
+                winners = new StringBuilder(candidates[candidtes]);
+            } else if (votes[candidtes] == maxVotes) {
+                winners.append(", ").append(candidates[candidtes]);
             }
         }
 
         System.out.println(winner + winners.toString());
-    }
+}
 }
