@@ -61,7 +61,22 @@ public class ElectionVotingSystem {
 
 
 
+//~Heshan Contribution - Start
+//enter candidates name.candidates names are letters only
+     System.out.println("Enter candidate names: ");
+        for (int X = 0; X < numCandidates; X++) {
+            while (true) {
+                System.out.print("Candidate " + (X + 1) + ": ");
+                String name = scanner.nextLine().trim();
+                if (name.matches("[a-zA-Z ]+")) {
+                    candidates[X] = name;
+                    break;
+                }
+                System.out.println("error! Use letters only");
+            }
+     }
 
+//~Heshan Contribution - End
 
 
 
