@@ -1,5 +1,5 @@
 // Udara contribution part start
-// the main menu and system setup, including the initial welcome message and the main loop for user interaction
+// the main menu and system setup, including the variable and initial welcome message and the main loop for user interaction
 import java.util.Scanner;
 public class ElectionVotingSystem {
     static String[] candidates;
