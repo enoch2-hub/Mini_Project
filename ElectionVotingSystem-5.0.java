@@ -248,6 +248,19 @@ public class ElectionVotingSystem {
 //            System.out.println("\nWinner : " + winners.toString());
 //        }
 
+
+        int newCode = 5;
+        static void exampleCode() {
+            System.out.println("This is a test code")
+
+            if(newCode == 5){
+                System.out.println("This is a newCode")
+                return;
+            }
+        }   
+
+        
+
         int maxVotes = -1;
         StringBuilder winners = new StringBuilder();
 
