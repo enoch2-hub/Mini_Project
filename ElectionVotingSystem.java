@@ -54,3 +54,80 @@ public class ElectionVotingSystem {
         } while (choice != 4);
     }
 // Udara Contribution end 
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+// Enoch's Contribution - (Start)-----------
+    
+//displayresults()` function, Implemented the logic to determine and display the winner(s)
+//handling ties and the singular/plural form of "winner/winners".
+//functionality to handle the cases where no voters are registered, or no votes have been cast.
+
+    static void displayresults() {
+        System.out.println("\n=== ELECTION RESULTS ===");
+
+        if (voterIds == null || voterIds.length == 0) {
+            System.out.println("No voters registered!");
+            return;
+        }
+
+        int totalVotes = 0;
+        for (int vote : votes) totalVotes += vote;
+
+        if (totalVotes == 0) {
+            System.out.println("No votes cast yet!");
+            return;
+        }
+
+        for (int X = 0; X < candidates.length; X++) {
+            double percentage = (votes[X] * 100.0) / totalVotes;
+            String voteString = (votes[X] == 1) ? "vote" : "votes";
+            System.out.printf("\n%s: %d %s (%.2f%%)\n",
+                    candidates[X], votes[X], voteString, percentage);
+        }
+
+        int maxVotes = -1;
+        StringBuilder winners = new StringBuilder();
+
+        for (int win = 0; win < candidates.length; win++) {
+            if (votes[win] > maxVotes) {
+                maxVotes = votes[win];
+                winners = new StringBuilder(candidates[win]);
+            } else if (votes[win] == maxVotes) {
+                if (winners.length() > 0) {
+                    winners.append(", ");
+                }
+                winners.append(candidates[win]);
+            }
+        }
+
+        if (winners.indexOf(",") > 0) {
+            System.out.println("\nWinners : " + winners);
+        } else {
+            System.out.println("\nWinner : " + winners);
+        }
+
+    }
+}
+
+
+// Enoch's Contribution - (End)------------
+
+
+
+
+
+
+    
