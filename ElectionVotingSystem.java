@@ -61,6 +61,9 @@ public class ElectionVotingSystem {
 
 
 
+
+
+
 //~Heshan's Contribution - Start...
 //enter candidates name.candidates names are letters only
      System.out.println("Enter candidate names: ");
@@ -77,9 +80,6 @@ public class ElectionVotingSystem {
      }
 
 //~Heshan's Contribution - End.
-
-
-
 
 
     
