@@ -61,7 +61,7 @@ public class ElectionVotingSystem {
 
 
 
-//~Heshan Contribution - Start
+//~Heshan's Contribution - Start...
 //enter candidates name.candidates names are letters only
      System.out.println("Enter candidate names: ");
         for (int X = 0; X < numCandidates; X++) {
@@ -76,7 +76,7 @@ public class ElectionVotingSystem {
             }
      }
 
-//~Heshan Contribution - End
+//~Heshan's Contribution - End.
 
 
 
