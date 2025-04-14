@@ -1,4 +1,5 @@
 // Udara contribution part start
+import java.util.Scanner;
 public class ElectionVotingSystem {
     static String[] candidates;
     static int[] voterIds;
