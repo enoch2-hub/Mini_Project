@@ -1,164 +1,62 @@
-# Mini-Project
+# Election Voting System - Mini Project
 
-import java.util.Scanner;
+![Image](https://github.com/user-attachments/assets/12601e38-c815-46be-bd19-96854d2e9750)
 
-public class SimpleVotingSystem {
-    // Arrays to store candidate names and their votes
-    private static String[] candidates = new String[10];
-    private static int[] votes = new int[10];
-    private static int candidateCount = 0;
-    private static Scanner scanner = new Scanner(System.in);
 
-    public static void main(String[] args) {
-        // Initialize with some candidates
-        addCandidate("Alice");
-        addCandidate("Bob");
-        addCandidate("Charlie");
+## Overview
 
-        boolean running = true;
-        while (running) {
-            displayMenu();
-            int choice = getIntInput("Enter your choice: ");
+This is a simple console-based Election Voting System developed as a mini-project. It allows an administrator to set up candidates and register voters, and then enables registered voters to cast their votes. Finally, it displays the election results, including the total votes for each candidate, their vote percentage, and the winner(s).
 
-            switch (choice) {
-                case 1:
-                    displayCandidates();
-                    break;
-                case 2:
-                    castVote();
-                    break;
-                case 3:
-                    displayResults();
-                    break;
-                case 4:
-                    addNewCandidate();
-                    break;
-                case 5:
-                    resetVotes();
-                    break;
-                case 6:
-                    findWinner();
-                    break;
-                case 7:
-                    running = false;
-                    System.out.println("Exiting voting system. Goodbye!");
-                    break;
-                default:
-                    System.out.println("Invalid choice. Please try again.");
-            }
-        }
-        scanner.close();
-    }
+This project was developed as an individual/group contribution for the Fundamentals of Programming course (Level 3).
 
-    // Function 1: Display menu
-    private static void displayMenu() {
-        System.out.println("\n=== Simple Voting System ===");
-        System.out.println("1. Display Candidates");
-        System.out.println("2. Cast a Vote");
-        System.out.println("3. Display Results");
-        System.out.println("4. Add New Candidate");
-        System.out.println("5. Reset All Votes");
-        System.out.println("6. Find Winner");
-        System.out.println("7. Exit");
-    }
+## Features
 
-    // Function 2: Get integer input
-    private static int getIntInput(String prompt) {
-        System.out.print(prompt);
-        while (!scanner.hasNextInt()) {
-            System.out.println("Please enter a number!");
-            scanner.next();
-        }
-        return scanner.nextInt();
-    }
+* **Admin Panel:**
+    * Secure access using an admin key.
+    * Ability to define the number of candidates and their names.
+    * Ability to register the number of voters and their unique IDs (with duplicate ID checking).
+* **Voter Panel:**
+    * Allows registered voters to cast their vote by entering their unique ID.
+    * Prevents unregistered voters from voting.
+    * Ensures each voter can only vote once.
+    * Displays the list of available candidates with their corresponding numbers.
+* **Results Display:**
+    * Shows the total number of votes received by each candidate.
+    * Calculates and displays the percentage of votes for each candidate.
+    * Identifies and displays the winner(s), handling ties correctly (displays "Winners" in case of a tie).
+* **Simple Console Interface:** User interaction is through basic text-based prompts and input.
 
-    // Function 3: Display all candidates
-    private static void displayCandidates() {
-        System.out.println("\n=== Candidates ===");
-        for (int i = 0; i < candidateCount; i++) {
-            System.out.println((i+1) + ". " + candidates[i]);
-        }
-    }
+## How to Run
 
-    // Function 4: Cast a vote
-    private static void castVote() {
-        displayCandidates();
-        if (candidateCount == 0) {
-            System.out.println("No candidates available!");
-            return;
-        }
+1.  **Save the code:** Save the provided Java code as `ElectionVotingSystem.java`.
+2.  **Compile:** Open a terminal or command prompt, navigate to the directory where you saved the file, and compile the code using the Java compiler:
+    ```bash
+    javac ElectionVotingSystem.java
+    ```
+3.  **Run:** After successful compilation, run the application using the Java Virtual Machine:
+    ```bash
+    java ElectionVotingSystem
+    ```
+4.  **Follow the prompts:** The application will guide you through the admin setup, voter login, voting process, and results display.
 
-        int choice = getIntInput("Enter candidate number to vote for: ");
-        if (choice > 0 && choice <= candidateCount) {
-            votes[choice-1]++;
-            System.out.println("Vote cast for " + candidates[choice-1]);
-        } else {
-            System.out.println("Invalid candidate number!");
-        }
-    }
+## Code Structure
 
-    // Function 5: Display voting results
-    private static void displayResults() {
-        System.out.println("\n=== Voting Results ===");
-        for (int i = 0; i < candidateCount; i++) {
-            System.out.println(candidates[i] + ": " + votes[i] + " votes");
-        }
-    }
+The project consists of a single Java file:
 
-    // Function 6: Add new candidate
-    private static void addCandidate(String name) {
-        if (candidateCount < candidates.length) {
-            candidates[candidateCount] = name;
-            votes[candidateCount] = 0;
-            candidateCount++;
-        }
-    }
+* **`ElectionVotingSystem.java`:** Contains the entire codebase, including:
+    * `main` method: Entry point of the application and handles the main menu.
+    * `adminPanel()`: Manages the administrator functionalities for setting up the election.
+    * `voterpanel()`: Handles the voter interface for casting votes.
+    * `findvoter()`: Helper function to locate a voter by ID.
+    * `display_Candidates()`: Displays the list of candidates.
+    * `displayresults()`: Calculates and displays the election results.
+    * `isVoter_IdUnique()`: Helper function to check for unique voter IDs.
+      
 
-    private static void addNewCandidate() {
-        if (candidateCount >= candidates.length) {
-            System.out.println("Maximum candidates reached!");
-            return;
-        }
-        System.out.print("Enter new candidate name: ");
-        scanner.nextLine(); // Clear buffer
-        String name = scanner.nextLine();
-        addCandidate(name);
-        System.out.println("Candidate added: " + name);
-    }
+## Future Enhancements (Optional)
 
-    // Function 7: Reset all votes
-    private static void resetVotes() {
-        for (int i = 0; i < candidateCount; i++) {
-            votes[i] = 0;
-        }
-        System.out.println("All votes have been reset.");
-    }
-
-    // Bonus function: Find winner
-    private static void findWinner() {
-        if (candidateCount == 0) {
-            System.out.println("No candidates available!");
-            return;
-        }
-
-        int maxVotes = votes[0];
-        String winner = candidates[0];
-        boolean tie = false;
-
-        for (int i = 1; i < candidateCount; i++) {
-            if (votes[i] > maxVotes) {
-                maxVotes = votes[i];
-                winner = candidates[i];
-                tie = false;
-            } else if (votes[i] == maxVotes) {
-                tie = true;
-            }
-        }
-
-        if (tie) {
-            System.out.println("There's a tie between multiple candidates!");
-        } else {
-            System.out.println("Current winner: " + winner + " with " + maxVotes + " votes");
-        }
-    }
-}
+* Implement data persistence using files or a database.
+* Enhance security with password hashing and more robust authentication.
+* Develop a graphical user interface (GUI) for better usability.
+* Add support for different voting methods (e.g., ranked-choice).
+* Implement features like vote auditing and reporting.
