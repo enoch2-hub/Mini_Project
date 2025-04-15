@@ -56,6 +56,40 @@ public class ElectionVotingSystem {
 // Udara Contribution end 
 
 
+    // Yehan's Contribution - (Start)-----------
+
+System.out.println("\n=== ADMIN PANEL ===");
+System.out.print("Enter number of candidates: ");
+int numCandidates = scanner.nextInt();
+scanner.nextLine();
+
+candidates = new String[numCandidates];
+votes = new int[numCandidates];
+
+// enter candidate names - letters only
+System.out.println("Enter candidate names: ");
+for (int X = 0; X < numCandidates; X++) {
+    while (true) {
+        System.out.print("Candidate " + (X + 1) + ": ");
+        String name = scanner.nextLine().trim();
+        if (name.matches("[a-zA-Z ]+")) {
+            candidates[X] = name;
+            break;
+        }
+        System.out.println("error! Use letters only");
+    }
+}
+
+// Yehan's Contribution - (End)------------
+
+
+
+
+
+    
+
+
+
 
 
 
@@ -145,31 +179,8 @@ public class ElectionVotingSystem {
 
 
 
-// Yehan's Contribution - (Start)-----------
 
-System.out.println("\n=== ADMIN PANEL ===");
-System.out.print("Enter number of candidates: ");
-int numCandidates = scanner.nextInt();
-scanner.nextLine();
 
-candidates = new String[numCandidates];
-votes = new int[numCandidates];
-
-// enter candidate names - letters only
-System.out.println("Enter candidate names: ");
-for (int X = 0; X < numCandidates; X++) {
-    while (true) {
-        System.out.print("Candidate " + (X + 1) + ": ");
-        String name = scanner.nextLine().trim();
-        if (name.matches("[a-zA-Z ]+")) {
-            candidates[X] = name;
-            break;
-        }
-        System.out.println("error! Use letters only");
-    }
-}
-
-// Yehan's Contribution - (End)------------
 
 
 
