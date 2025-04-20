@@ -174,22 +174,6 @@ for (int X = 0; X < numCandidates; X++) {
 
 
 
-    static int findvoter(int voterId) {
-        for (int find = 0; find < voterIds.length; find++) {
-            if (voterIds[find] == voterId) {
-                return find;
-            }
-        }
-        return -1;
-    }
-
-    static void display_Candidates() {
-        System.out.println("\nAvailable Candidates:");
-        for (int dis = 0; dis < candidates.length; dis++) {
-            System.out.println((dis + 1) + ". " + candidates[dis]);
-        }
-    }
-
 // vishva senal's Contribution - (End)------------
 
 
