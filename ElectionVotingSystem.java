@@ -118,6 +118,82 @@ for (int X = 0; X < numCandidates; X++) {
 //~Heshan's Contribution - End.
 
 
+
+// vishva senal's Contribution - (Start)-----------
+
+    static void voterpanel() {
+        System.out.println("\n=== VOTER PANEL ===");
+        int votersVoted = 0;
+
+        System.out.println("enter '0' exit to main menu"); //do you want go to main menu enter number 0
+
+        while (votersVoted < voterIds.length) {
+            System.out.print("\nEnter voter ID : ");
+            String input = scanner.nextLine();
+
+            if (input.equals("0")) break;
+
+            try {
+                int voterId = Integer.parseInt(input);
+                int voterIndex = findvoter(voterId);
+
+                if (voterIndex == -1) {
+                    System.out.println("You are not eligible to vote");
+                    continue;
+                }
+
+                if (voted[voterIndex]) {
+                    System.out.println("You have already voted");
+                    continue;
+                }
+
+                System.out.println("You are eligible to vote");
+                display_Candidates();
+
+                System.out.print("Enter candidate number: ");
+                try {
+                    int candidateNum = Integer.parseInt(scanner.nextLine()) - 1;
+                    if (candidateNum >= 0 && candidateNum < candidates.length) {
+                        votes[candidateNum]++;
+                        voted[voterIndex] = true;
+                        votersVoted++;
+                        System.out.println("Vote recorded for " + candidates[candidateNum]);
+                    } else {
+                        System.out.println("Invalid candidate number");
+                    }
+                } catch (NumberFormatException e) {
+                    System.out.println("Please enter a valid number");
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Please enter a valid voter ID");
+            }
+        }
+
+        System.out.println("\nVoting system ended");
+    }
+
+
+
+    static int findvoter(int voterId) {
+        for (int find = 0; find < voterIds.length; find++) {
+            if (voterIds[find] == voterId) {
+                return find;
+            }
+        }
+        return -1;
+    }
+
+    static void display_Candidates() {
+        System.out.println("\nAvailable Candidates:");
+        for (int dis = 0; dis < candidates.length; dis++) {
+            System.out.println((dis + 1) + ". " + candidates[dis]);
+        }
+    }
+
+// vishva senal's Contribution - (End)------------
+
+
+
     
     
 // Enoch's Contribution - (Start)-----------
