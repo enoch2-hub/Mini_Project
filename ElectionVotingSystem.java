@@ -82,36 +82,38 @@ for (int X = 0; X < numCandidates; X++) {
 
 // Yehan's Contribution - (End)------------
 
-
-
-
-
-    
-
-
-
-
-
-
-
-
-
-
-
 //~Heshan's Contribution - Start...
-//enter candidates name.candidates names are letters only
-     System.out.println("Enter candidate names: ");
-        for (int X = 0; X < numCandidates; X++) {
+//Develop the voter setup section within the adminPanel()
+ // enter  number of voters. voter id are numbers only and don't use same voter id //
+
+        System.out.print("\nEnter number of voters: ");
+        int numVoters = scanner.nextInt();
+        scanner.nextLine();
+        voterIds = new int[numVoters];
+        voted = new boolean[numVoters];
+
+        System.out.println("Enter voter IDs: ");
+        for (int vot = 0; vot < numVoters; vot++) {
             while (true) {
-                System.out.print("Candidate " + (X + 1) + ": ");
-                String name = scanner.nextLine().trim();
-                if (name.matches("[a-zA-Z ]+")) {
-                    candidates[X] = name;
-                    break;
+                try {
+                    System.out.print("Voter ID " + (vot + 1) + ": ");
+                    int id = Integer.parseInt(scanner.nextLine());
+
+                    if (isVoter_IdUnique(id, vot)) {
+                        voterIds[vot] = id;
+                        break;
+                    } else {
+                        System.out.println("This voter ID already exists! Please enter a unique ID");
+                    }
+                } catch (NumberFormatException e) {
+                    System.out.println("Invalid input! Please enter numbers only");
                 }
-                System.out.println("error! Use letters only");
             }
-     }
+        }
+
+        System.out.println("\n ");
+        return true;
+}
 
 //~Heshan's Contribution - End.
 
