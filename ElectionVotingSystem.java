@@ -7,7 +7,7 @@ public class ElectionVotingSystem {
     static int[] votes;
     static boolean[] voted;
     static Scanner scanner = new Scanner(System.in);
-    static final String ADMIN_KEY = "admin123";
+    static final String ADMIN_KEY = "admin123"; // Admin key for accessing the admin panel
 
     public static void main(String[] args) {
         System.out.println("\n$$$$$ Welcome to Voting System $$$$$");
@@ -54,7 +54,20 @@ public class ElectionVotingSystem {
         } while (choice != 4);
     }
 // Udara Contribution end 
+// Thsara's Contribution - (Start)-------
+    //Admin Panel=====================
 
+    // enter admin key. admin key is admin123
+
+    static boolean adminPanel() {
+        System.out.print("\nEnter Admin Key: ");
+        String adminKey = scanner.nextLine();
+
+        if (!adminKey.equals(ADMIN_KEY)) {
+            System.out.println("Invalid Admin Key");
+            return false;
+        }
+    //Thisara's Contribution - (End)--------
 
     // Yehan's Contribution - (Start)-----------
 
