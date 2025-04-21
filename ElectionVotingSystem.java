@@ -118,6 +118,16 @@ for (int X = 0; X < numCandidates; X++) {
 //~Heshan's Contribution - End.
 
 // - Miloshana's Contribution - (Start)........
+
+// Checks if this voter ID has been used before in the list so far
+    static boolean isVoter_IdUnique(int id, int currentIndex) {
+        for (int che = 0; che < currentIndex; che++) {
+            if (voterIds[che] == id) {
+                return false; // ID is not unique
+            }
+        }
+        return true; // ID is unique up to this point
+    }
 // Searches for a voter ID. Returns index if found, -1 otherwise. 
     static int findvoter(int voterId) {
         for (int find = 0; find < voterIds.length; find++) {
