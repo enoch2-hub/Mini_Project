@@ -117,7 +117,25 @@ for (int X = 0; X < numCandidates; X++) {
 
 //~Heshan's Contribution - End.
 
+// - Miloshana's Contribution - (Start)........
+// Searches for a voter ID. Returns index if found, -1 otherwise. 
+    static int findvoter(int voterId) {
+        for (int find = 0; find < voterIds.length; find++) {
+            if (voterIds[find] == voterId) {
+                return find;
+            }
+        }
+        return -1;
+    }
 
+    // Displays available candidates. 
+    static void display_Candidates() {
+        System.out.println("\nAvailable Candidates:");
+        for (int dis = 0; dis < candidates.length; dis++) {
+            System.out.println((dis + 1) + ". " + candidates[dis]);
+        }
+    }
+// - Miloshana's Contribution - (End).......
 
 // vishva senal's Contribution - (Start)-----------
 
